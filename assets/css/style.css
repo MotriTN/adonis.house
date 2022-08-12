@@ -25,11 +25,30 @@ canvas {
   left: 0;
   z-index: -9999;
 }
+
 .houseIcon {
   position: relative;
   top: 2px;
   height: 36px;
   width: 36px;
+}
+
+.adonisImg {
+  height: 28px;
+  margin-right: 12px;
+}
+
+.button {
+  align-self: center;
+  background-color: rgb(185, 19, 19);
+  color: white;
+  font-size: 15px;
+  opacity: 90%;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .find-home-button {
@@ -38,15 +57,8 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: rgb(185, 19, 19);
-  color: white;
   font-size: 20px;
-  opacity: 90%;
-  font-weight: bold;
   padding: 3vh 2vw;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
 }
 
 .navbar-brand {
@@ -105,6 +117,7 @@ canvas {
 
 /* stage 2 */
 
+/* fade in/out */
 .fade-out {
   animation: fadeOut ease 3s;
   animation-fill-mode: forwards;
@@ -133,17 +146,21 @@ canvas {
   }
 }
 
-.visible {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 2s linear;
-}
+/* fade in/out end */
 
 #stage-2 {
   display: none;
   opacity: 0;
 }
 
+.stage-2-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+}
+
+/* media queries for mobile devices, tablets, and desktop */
 @media (max-device-width: 799px) {
   .stage-2-wrapper > .adonis_rising {
     max-height: 50vh;
@@ -235,19 +252,11 @@ canvas {
   }
 }
 
-.stage-2-wrapper {
-  display: inline-flex;
-  flex-direction: column;
-  position: relative;
-  text-align: center;
-}
+/* media queries end */
 
-.flag-img {
+.fast-globe {
   align-self: center;
-  position: relative;
-  border: 3px solid darkblue;
-  border-radius: 7px;
-  max-height: 7vh;
+  position: absolute;
 }
 
 .adonis_rising {
@@ -257,38 +266,7 @@ canvas {
   margin-right: auto;
 }
 
-.join-button {
-  align-self: center;
-  background-color: rgb(185, 19, 19);
-  color: white;
-  font-size: 15px;
-  opacity: 90%;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-  margin-bottom: 15px;
-  padding: 20px 40px;
-}
-
-.not-your-country-button {
-  align-self: center;
-  background-color: rgb(185, 19, 19);
-  color: white;
-  font-size: 15px;
-  opacity: 90%;
-  font-weight: bold;
-  margin-left: auto;
-  margin-right: auto;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 20px 30px;
-}
-
 .country-wrapper {
-  /*background-color: rgba(138, 43, 226, 0.5);*/
   display: inline-flex;
   flex-direction: column;
   padding: 20px;
@@ -302,9 +280,21 @@ canvas {
   margin-top: 10px;
 }
 
-.fast-globe {
+.flag-img {
   align-self: center;
-  position: absolute;
+  position: relative;
+  border: 3px solid darkblue;
+  border-radius: 7px;
+  max-height: 7vh;
+}
+
+.join-button {
+  margin-bottom: 15px;
+  padding: 20px 40px;
+}
+
+.not-your-country-button {
+  padding: 20px 30px;
 }
 
 .country-search {
@@ -386,17 +376,8 @@ canvas {
 }
 
 .make-brotherhood-button {
-  align-self: center;
-  background-color: rgb(185, 19, 19);
-  color: white;
-  font-size: 15px;
-  opacity: 90%;
-  font-weight: bold;
   margin-left: auto;
   margin-right: auto;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   padding: 20px;
   width: 50%;
   margin-bottom: 1vh;
@@ -435,8 +416,6 @@ canvas {
 .info-buttons {
   display: inline-flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-top: 1vh;
   margin-bottom: 1vh;
   margin-right: 1vh;
@@ -519,23 +498,13 @@ canvas {
   color: whitesmoke;
 }
 
-/* volume control css */
-#vol-control {
-  width: 50%;
-  align-self: center;
-}
-
 /* thanks a lot, https://css-tricks.com/lets-create-a-custom-audio-player/ */
 #audio-player-container {
-  --seek-before-width: 0%;
-  --volume-before-width: 100%;
-  --buffered-width: 0%;
   align-self: center;
   justify-content: center;
   width: 95%;
   max-width: 500px;
   display: inline-flex;
-  flex-direction: row;
   background: transparent;
 }
 
@@ -546,8 +515,6 @@ canvas {
   height: 2em;
   cursor: pointer;
   padding: 0;
-  margin-top: auto;
-  margin-bottom: auto;
   margin-right: 8px;
 }
 
@@ -555,7 +522,6 @@ output {
   width: 32px;
   text-align: center;
   font-size: 20px;
-  clear: left;
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 8px;
@@ -577,7 +543,7 @@ output {
     background: rgba(0, 125, 181, 0.6);
 }
 #volume-slider::before {
-    width: var(--volume-before-width);
+    width: 100%;
 }
 
 input[type="range"] {

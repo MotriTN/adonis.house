@@ -53,11 +53,9 @@
 	<meta name="msapplication-config" content="assets/img/favicons/browserconfig.xml">
 
     <!-- CSS & fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css">
+    <link rel="stylesheet" href="assets/css/fonts/lato.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="assets/css/normalize.min.css">
 </head>
 
 <body>
@@ -74,7 +72,7 @@
         </style>
         <div class="center-screen">
             <nav class="navbar">
-                <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
+                <a class="navbar-brand" href="#"><img src="assets/img/adonis.webp" class="adonisImg"><img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
             </nav>
             <div class="wrapper" id="stage-1">
                 <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp"/>
@@ -122,12 +120,12 @@
 
     <div class="center-screen" id="main">
         <nav class="navbar">
-            <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon"/></a>
+            <a class="navbar-brand" href="#"><img src="assets/img/adonis.webp" class="adonisImg"><img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
         </nav>
         <div class="wrapper" id="stage-1">
             <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp" alt="Adonis holding the spinning Earth"/>
             <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.webp" alt="The Earth spinning"/>
-            <button class="find-home-button">Find your new home</button>
+            <button class="button find-home-button">Find your new home</button>
             <br />
             <div id="audio-player-container">
                 <audio src="assets/mp3/humming.mp3" id="hummingAudio" autoplay>
@@ -164,9 +162,9 @@
                         <h2 class="country-name"></h2>
                     </div>
 
-                    <button class="join-button"></button>
+                    <button class="button join-button"></button>
 
-                    <button class="not-your-country-button">Not your true country?</button>
+                    <button class="button not-your-country-button">Not your true country?</button>
 
                     <div class="country-search">
                         <input type="text" class="country-input" placeholder="Enter your country here.." onKeyUp="populateServerList(this.value)"/>
@@ -175,7 +173,7 @@
                 </div>
                 <div class="no-country-found-wrapper">
                     <h2 class="no-country-found-title">No brotherhood was found!</h2>
-                    <a href="#open-modal"><button class="make-brotherhood-button">I encourage you to make one, and lead it. Click here to find out how.</button></a>
+                    <a href="#open-modal"><button class="button make-brotherhood-button">I encourage you to make one, and lead it. Click here to find out how.</button></a>
                 </div>
                 <img class="adonis_rising" src="assets/img/stage2/adonis_rising.webp"/>
             </div>
