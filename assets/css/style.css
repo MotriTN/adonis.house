@@ -325,8 +325,9 @@ canvas {
   text-align: center;
 }
 
-.country-input:focus {
+.country-search:focus-within {
   outline: 3px solid #ddd;
+  border-radius: 5px;
 }
 
 .country-list {
@@ -339,12 +340,12 @@ canvas {
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   max-height: 200px;
   flex: 0 0 100%;
   display: grid;
   grid-auto-flow: row;
-  grid-template-rows: 100%;
 }
 
 .country-btn {
@@ -400,3 +401,25 @@ canvas {
   position: relative;
   top: 5vh;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 #383838;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #383838;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 11px;
+    border: 0px solid #ffffff;
+  }

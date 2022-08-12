@@ -51,28 +51,61 @@
 	<meta name="msapplication-TileImage" content="assets/img/favicons/favicon-144.png">
 	<meta name="msapplication-config" content="assets/img/favicons/browserconfig.xml">
 
+    <noscript>
+      <style>
+        /**
+        * Reinstate scrolling for non-JS clients
+        */
+        .simplebar-content-wrapper {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+
     <!-- CSS & fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&amp;display=swap">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://yarnpkg.com/en/package/normalize.css">
 </head>
 
 <body>
     <canvas id="canvas" style="width: 100%; height: 100%; padding: 0;margin: 0;"></canvas>
-    <div class="center-screen">
+    
+    <noscript>
+        <style type="text/css">
+            #main {
+                display:none;
+            }
+            #canvas {
+                background-color: black;
+            }
+        </style>
+        <div class="center-screen">
+            <nav class="navbar">
+                <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon"/></a>
+            </nav>
+            <div class="wrapper" id="stage-1">
+                <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp"/>
+                <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.webp"/>
+                <button class="find-home-button">Adonis requires that you enable JavaScript.</button>
+            </div>
+        </div>
+    </noscript>
+
+    <div class="center-screen" id="main">
         <nav class="navbar">
             <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon"/></a>
         </nav>
         <div class="wrapper" id="stage-1">
-            <img class="adonisglobe" src="assets/img/stage1/adonisglobe.png"/>
-            <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.gif"/>
+            <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp"/>
+            <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.webp"/>
             <button class="find-home-button">Find your new home</button>
         </div>
         <div id="stage-2">
             <div class="stage-2-wrapper">
-                <img class="fast-globe" src="assets/img/stage1/Rotating_earth_animated_transparent_fast.gif"/>
+                <img class="fast-globe" src="assets/img/stage1/Rotating_earth_animated_transparent_fast.webp"/>
                 <div class="country-wrapper">
                     <div class="country">
                         <img class="flag-img"/>
@@ -92,7 +125,7 @@
                     <h2 class="no-country-found-title">No brotherhood was found!</h2>
                     <button class="make-brotherhood-button">I encourage you to make one, and lead it. Click here to find out how.</button>
                 </div>
-                <img class="adonis_rising" src="assets/img/stage2/adonis_rising.png"/>
+                <img class="adonis_rising" src="assets/img/stage2/adonis_rising.webp"/>
             </div>
         </div>
     </div>

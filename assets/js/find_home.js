@@ -9,7 +9,7 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
 
   // ..Then we'll change the globe gif to a faster one, both to tell the user something is happening
   const globeImg = document.getElementsByClassName("globe")[0];
-  globeImg.src = "assets/img/stage1/Rotating_earth_animated_transparent_fast.gif"
+  globeImg.src = "assets/img/stage1/Rotating_earth_animated_transparent_fast.webp"
 
   // We'll disable it so they cannot trigger this 5000 times and break anything
   findHomeBtn.disabled = true;
@@ -71,6 +71,13 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
 
   // If the user wants to find another country's Discord server, we'll add the event listener now (since you cannot do it earlier)
   document.getElementsByClassName("not-your-country-button")[0].addEventListener("click", async () => {
+    // Clear value of search box & the list to make it less annoying to search again
+    const countrySearchBox = document.getElementsByClassName("country-input")[0];
+    countrySearchBox.value = "";
+
+    const countryList = document.getElementById("countryList")
+    countryList.replaceChildren();
+
     const notYourCountryBtn = document.getElementsByClassName("not-your-country-button")[0];
     notYourCountryBtn.style.display = "none";
 
