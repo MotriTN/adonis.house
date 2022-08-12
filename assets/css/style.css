@@ -69,6 +69,7 @@ canvas {
   display: inline-flex;
   position: relative;
   text-align: center;
+  flex-direction: column;
 }
 
 .adonisglobe {
@@ -151,6 +152,12 @@ canvas {
 
   .fast-globe {
     max-width: 100vw;
+  }
+
+  .modal-window > div {
+    font-size: 15px;
+    max-width: 75vw;
+    padding: 1em;
   }
 }
 
@@ -392,6 +399,7 @@ canvas {
   cursor: pointer;
   padding: 20px;
   width: 50%;
+  margin-bottom: 1vh;
 }
 
 .no-country-found-wrapper {
@@ -403,23 +411,267 @@ canvas {
 }
 
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #c0c0c0 #383838;
-  }
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c0c0c0 #383838;
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 12px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: #383838;
-  }
+*::-webkit-scrollbar-track {
+  background: #383838;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #c0c0c0;
-    border-radius: 11px;
-    border: 0px solid #ffffff;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 11px;
+  border: 0px solid #ffffff;
+}
+
+.info-buttons {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  margin-right: 1vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.info-button {
+  background-color: rgba(25, 113, 194, 0.35);
+  color: rgb(165, 216, 255);
+  height: 36px;
+  padding: 5px 18px;
+  display: block;
+  width: auto;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  margin-left: 1vh;
+}
+
+/* modal css */
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-window:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  color: rgb(194, 189, 181);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 3px, rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px;
+  outline-color: currentcolor;
+  background-color: rgb(21, 23, 24);
+}
+
+.modal-window a {
+  color: rgb(82, 176, 247);
+  text-decoration: underline;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modal-close {
+  color: rgb(207, 206, 206);
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+
+.modal-close:hover {
+  color: whitesmoke;
+}
+
+/* volume control css */
+#vol-control {
+  width: 50%;
+  align-self: center;
+}
+
+/* thanks a lot, https://css-tricks.com/lets-create-a-custom-audio-player/ */
+#audio-player-container {
+  --seek-before-width: 0%;
+  --volume-before-width: 100%;
+  --buffered-width: 0%;
+  align-self: center;
+  justify-content: center;
+  width: 95%;
+  max-width: 500px;
+  display: inline-flex;
+  flex-direction: row;
+  background: transparent;
+}
+
+.sound-button {
+  background-color: transparent;
+  border: 0;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 8px;
+}
+
+output {
+  width: 32px;
+  text-align: center;
+  font-size: 20px;
+  clear: left;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 8px;
+}
+
+#volume-slider {
+  width: 58%;
+  background: transparent;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#volume-slider::-webkit-slider-runnable-track {
+    background: rgba(0, 125, 181, 0.6);
+}
+#volume-slider::-moz-range-track {
+    background: rgba(0, 125, 181, 0.6);
+}
+#volume-slider::-ms-fill-upper {
+    background: rgba(0, 125, 181, 0.6);
+}
+#volume-slider::before {
+    width: var(--volume-before-width);
+}
+
+input[type="range"] {
+    position: relative;
+    -webkit-appearance: none;
+    width: 48%;
+    margin: 0;
+    padding: 0;
+    height: 19px;
+    margin-left: 5px;
+    float: left;
+    outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+input[type="range"]::before {
+    position: absolute;
+    content: "";
+    top: 8px;
+    left: 0;
+    width: var(--seek-before-width);
+    height: 3px;
+    background-color: #007db5;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    border: 1px solid #007db5;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    margin: -7px 0 0 0;
+}
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background: #007db5;
+}
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+input[type="range"]::-moz-range-progress {
+    background-color: #007db5;
+}
+input[type="range"]::-moz-focus-outer {
+    border: 0;
+}
+input[type="range"]::-moz-range-thumb {
+    box-sizing: content-box;
+    border: 1px solid #007db5;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+}
+input[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.2);
+    background: #007db5;
+}
+input[type="range"]::-ms-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: transparent;
+    border: solid transparent;
+    color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+    background-color: #007db5;
+}
+input[type="range"]::-ms-fill-upper {
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+input[type="range"]::-ms-thumb {
+    box-sizing: content-box;
+    border: 1px solid #007db5;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+}
+input[type="range"]:active::-ms-thumb {
+    transform: scale(1.2);
+    background: #007db5;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -17,18 +17,18 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://adonis.house">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Adoniss">
     <meta property="og:title" content="Adonis.House: A New Brotherhood">
     <meta property="og:description" content="Looking to change, to level up your life, and to follow your dreams? Join Adonis on the journey of finding a new brotherhood, for YOU.">
-    <meta property="og:image" content="assets/img/favicons/favicon-310.png">
+    <meta property="og:image" content="https://adonis/assets/img/favicons/favicon-310.png">
     <meta name="theme-color" content="#808080" />
 
     <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="adonis.house">
     <meta property="twitter:url" content="https://adonis.house">
     <meta name="twitter:title" content="Adonis.House: A New Brotherhood">
     <meta name="twitter:description" content="Looking to change, to level up your life, and to follow your dreams? Join Adonis on the journey of finding a new brotherhood, for YOU.">
-    <meta name="twitter:image" content="assets/img/favicons/gigachad.jpg">
+    <meta name="twitter:image" content="https://adonis.house/assets/img/favicons/gigachad.jpg">
 
     <!-- faviconit icon stuff -->
     <link rel="shortcut icon" href="assets/img/favicons/favicon.ico">
@@ -74,7 +74,7 @@
         </style>
         <div class="center-screen">
             <nav class="navbar">
-                <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon"/></a>
+                <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
             </nav>
             <div class="wrapper" id="stage-1">
                 <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp"/>
@@ -84,16 +84,78 @@
         </div>
     </noscript>
 
+    <div class="info-buttons">
+        <a class="info-button" type="button" href="https://github.com/Keanu73/adonis.house" target="_blank" title="View source on Github">
+            <div style="text-align:center;">
+                <img src="assets/img/stage1/github.svg" alt="GitHub logo" />
+            </div>
+        </a>
+
+        <a class="info-button" type="button" href="#open-info-modal" title="Info about website">
+            <div style="text-align:center;">
+                <img src="assets/img/stage1/question-mark.svg" alt="Question mark" />
+            </div>
+        </a>
+    </div>
+
+    <div id="open-info-modal" class="modal-window">
+      <div>
+        <a href="#" title="Close" class="modal-close">Close</a>
+        <h1>Welcome to Adonis's House.</h1>
+        <div>
+            <p>Many like-minded individuals on self-improvement have remarked about <i>not being able to find a true tribe or brotherhood</i>, one which is <b>on the path to self-improvement.</b></p>
+            <p>This reason is why we created Adonis.House - so that, you, a man on the path to be like Adonis, can find Discord servers with other people on self-improvement.</p>
+            <p>Close this dialog, click the big red button, and enjoy.</p>
+            <p>If you find any issues with the website, contact <b>Keanu73#2193</b> on Discord as soon as possible.</p>
+            <p>Credit to the following people for making this website possible:</p>
+            <ul>
+                <li><b>Keanu73</b> - for designing & creating this website</li>
+                <li><b>felixsx</b> - for creating the backend & initial prototype of this website</li>
+                <li><b>Agro7</b> - for starting the Global Hub project</li>
+                <li><b>saja6558</b> - for creating an earlier prototype with a similar idea in mind & providing feedback</li>
+                <li><b>Chuck Norris</b> - for kickstarting this project & providing feedback</li>
+                <li><b>bano</b> - for providing feedback</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="center-screen" id="main">
         <nav class="navbar">
             <a class="navbar-brand" href="#">Adonis.<img src="assets/img/house.svg" class="houseIcon"/></a>
         </nav>
         <div class="wrapper" id="stage-1">
-            <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp"/>
-            <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.webp"/>
+            <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp" alt="Adonis holding the spinning Earth"/>
+            <img class="globe" src="assets/img/stage1/Rotating_earth_animated_transparent.webp" alt="The Earth spinning"/>
             <button class="find-home-button">Find your new home</button>
+            <br />
+            <div id="audio-player-container">
+                <audio src="assets/mp3/humming.mp3" id="hummingAudio" autoplay>
+                    <p>If you are reading this, it is because your browser does not support the audio element.</p>
+                </audio>
+                <button class="sound-button">
+                    <img class="sound-button-img" src="assets/img/stage1/unmuted.svg" alt="Sound unmuted" height="32px" width="32px"/>
+                </button>
+                <output id="volume-output">50</output>
+                <input type="range" id="volume-slider" max="100" value="50">
+            </div>
         </div>
         <div id="stage-2">
+            <div id="open-modal" class="modal-window">
+              <div>
+                <a href="#" title="Close" class="modal-close">Close</a>
+                <h1>Welcome, brother.</h1>
+                <div>
+                    <p>We don't have servers for every country as of now, and, we would greatly appreciate it if you created one for yours.</p>
+                    <p>Here's the steps you need to follow to create a server:</p>
+                    <ul>
+                        <li>Create a server using the following <a href="https://discord.com/template/2AAUGBqBm3Nm">template.</a></li>
+                        <li>Contact felixsx#9501 on Discord so we can add your server to the list.</li>
+                    </ul>
+                    <p>Alternatively, you can request a server for your country in the <a href="https://discord.com/channels/811270187843977236/996692905358004284">#global-hub-suggestions channel</a> in <a href="https://discord.gg/hamza">Hamza's Discord server.</a></p>
+                </div>
+              </div>
+            </div>
             <div class="stage-2-wrapper">
                 <img class="fast-globe" src="assets/img/stage1/Rotating_earth_animated_transparent_fast.webp"/>
                 <div class="country-wrapper">
@@ -113,7 +175,7 @@
                 </div>
                 <div class="no-country-found-wrapper">
                     <h2 class="no-country-found-title">No brotherhood was found!</h2>
-                    <button class="make-brotherhood-button">I encourage you to make one, and lead it. Click here to find out how.</button>
+                    <a href="#open-modal"><button class="make-brotherhood-button">I encourage you to make one, and lead it. Click here to find out how.</button></a>
                 </div>
                 <img class="adonis_rising" src="assets/img/stage2/adonis_rising.webp"/>
             </div>

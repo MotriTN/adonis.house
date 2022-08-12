@@ -2,6 +2,26 @@
 
 var serverList = {};
 
+window.addEventListener('load', async () => {
+  const hummingAudio = document.getElementById("hummingAudio");
+  hummingAudio.volume = 0.5;
+});
+
+// It kindof works.
+// Thanks: https://markmichon.com/automatic-retries-with-fetch
+const fetchPlus = (url, options = {}, retries) =>
+  fetch(url, options)
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      if (retries > 0) {
+        return fetchPlus(url, options, retries - 1)
+      }
+      throw new Error(res.status)
+    })
+    .catch(error => console.error(error.message))
+
 document.getElementsByClassName("find-home-button")[0].addEventListener("click", async () => {
   // We'll first change the text of the find home button
   const findHomeBtn = document.getElementsByClassName("find-home-button")[0];
@@ -57,17 +77,28 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
   await sleep(2000);
   stage1Wrapper.style.display = "none";
 
+  // Remove the current background audio element
+  const hummingAudio = document.getElementById("hummingAudio");
+  hummingAudio.remove();
+
   // Once that's done, fade in the new stage 2 wrapper.
   const stage2Wrapper = document.getElementById("stage-2");
   stage2Wrapper.style.display = "block";
   stage2Wrapper.classList.toggle("fade-in");
 
-  // Add the gigachad music
+  // Add the gigachad music, using settings from volume control
   document.getElementById("stage-2").innerHTML += `<audio src="assets/mp3/gigachadmusic.mp3" id="gigachadaudio" autoplay>
 <p>If you are reading this, it is because your browser does not support the audio element.</p>
 </audio>`
   const audio = document.getElementById("gigachadaudio");
-  audio.volume = 0.3;
+  const soundButton = document.getElementsByClassName("sound-button")[0];
+  const volumeSlider = document.getElementById("volume-slider");
+
+  audio.volume = (volumeSlider.value / 100);
+
+  if (soundButton.classList.contains("muted")) {
+    audio.muted = true;
+  }
 
   // If the user wants to find another country's Discord server, we'll add the event listener now (since you cannot do it earlier)
   document.getElementsByClassName("not-your-country-button")[0].addEventListener("click", async () => {
@@ -78,11 +109,15 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
     const countryList = document.getElementById("countryList")
     countryList.replaceChildren();
 
+    // Hide button, show input box & list
+
     const notYourCountryBtn = document.getElementsByClassName("not-your-country-button")[0];
     notYourCountryBtn.style.display = "none";
 
     const countrySearch = document.getElementsByClassName("country-search")[0];
     countrySearch.style.display = "flex";
+
+    document.getElementsByClassName("country-input")[0].focus();
   });
 });
 
@@ -117,7 +152,8 @@ async function setCurrentCountry(name, countryCode, inviteURL, newCountrySelecte
 function autocompleteMatch(input) {
   if (input === '') return [];
 
-  const reg = new RegExp(input)
+  const lowercase = input.toLowerCase();
+  const reg = new RegExp(lowercase);
 
   const filtered = Object.keys(serverList)
   .filter((term) => term.match(reg))
@@ -145,7 +181,6 @@ function populateServerList(input) {
     // Clear the existing country list
     countryList.replaceChildren();
 
-
     // If the match has been run against the server list, then..
     if (terms) {
 
@@ -161,10 +196,10 @@ function populateServerList(input) {
         </button>
         `)
         }
-      } else {
+      } else if (keys.length === 0 && input !== '') {
         // If not.. encourage them to use their "FREEDOM" to create a server
         countryList.insertAdjacentHTML('beforeend', `
-        <button class="country-btn" onclick=''>
+        <button class="country-btn" onclick='window.location.href="#open-modal"'>
             <img class="country-btn-img" src="https://flagcdn.com/us.svg"/>
             <span class="country-btn-name">No brotherhood has been found for your country. Make one, and lead it, brother.</span>
         </button>
@@ -183,6 +218,34 @@ function populateServerList(input) {
   }
 }
 
+// These CodePens are lifesavers:
+// https://codepen.io/idorenyinudoh/pen/GRjBXER
+// https://codepen.io/shahednasser/pen/XWgbGBN
+const playerButton = document.querySelector('.player-button'),
+  audio = document.querySelector('audio'),
+  soundButton = document.querySelector('.sound-button'),
+  volumeSlider = document.querySelector("#volume-slider"),
+  outputContainer = document.querySelector("#volume-output");
+
+// Adds event listeners to mute button & volume slider.
+soundButton.addEventListener('click', (e) => {
+  audio.muted = !audio.muted;
+  if (audio.muted)
+    soundButton.classList.add("muted")
+  else
+    soundButton.classList.remove("muted");
+  const soundButtonImg = document.getElementsByClassName('sound-button-img')[0];
+  soundButtonImg.src = audio.muted ? "assets/img/stage1/muted.svg" : "assets/img/stage1/unmuted.svg";
+  soundButtonImg.alt = audio.muted ? "Sound muted" : "Sound unmuted";
+});
+
+volumeSlider.addEventListener('input', (e) => {
+    const value = e.target.value;
+
+    outputContainer.textContent = value;
+    audio.volume = value / 100;
+});
+
 // Bog standard sleep function.
 // My go-to, thanks! https://stackoverflow.com/a/39914235
 function sleep(ms) {
@@ -193,18 +256,3 @@ function sleep(ms) {
 function openURL(url) {
   window.open(url, '_self');
 }
-
-// It kindof works.
-// Thanks: https://markmichon.com/automatic-retries-with-fetch
-const fetchPlus = (url, options = {}, retries) =>
-  fetch(url, options)
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      if (retries > 0) {
-        return fetchPlus(url, options, retries - 1)
-      }
-      throw new Error(res.status)
-    })
-    .catch(error => console.error(error.message))
