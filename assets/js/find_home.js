@@ -2,74 +2,83 @@
 
 var serverList = {};
 
+// So, when the page fully loads..
 window.addEventListener('load', async () => {
-  document.getElementById("audio-player-container").innerHTML += `
-  <audio src="assets/mp3/humming.mp3" id="hummingAudio" autoplay loop>
-      <p>If you are reading this, it is because your browser does not support the audio element.</p>
-  </audio>`
-  const hummingAudio = document.getElementById("hummingAudio");
-  hummingAudio.volume = 0.5;
+
+  // Add event listener to the "Begin" button.
+  document.getElementById("begin-btn").addEventListener("click", async () => {
+
+    // Load in stars.js
+    await loadCDN('assets/js/stars.js');
+
+    // Replace static Earth image in stage 1 with spinning Earth.
+    const stage1Globe = document.getElementById("stage-1-globe");
+    stage1Globe.setAttribute("src", stage1Globe.getAttribute("data-src"));
+
+    // Add background music
+    document.getElementById("audio-player-container").innerHTML += `
+    <audio src="assets/mp3/humming.mp3" id="hummingAudio" autoplay loop>
+        <p>If you are reading this, it is because your browser does not support the audio element.</p>
+    </audio>`
+    const hummingAudio = document.getElementById("hummingAudio");
+    hummingAudio.volume = 0.5;
 
     // These CodePens are lifesavers:
-  // https://codepen.io/idorenyinudoh/pen/GRjBXER
-  // https://codepen.io/shahednasser/pen/XWgbGBN
-  const playerButton = document.querySelector('.player-button'),
-    audio = document.querySelector('audio'),
-    soundButton = document.querySelector('.sound-button'),
-    volumeSlider = document.querySelector("#volume-slider"),
-    outputContainer = document.querySelector("#volume-output");
+    // https://codepen.io/idorenyinudoh/pen/GRjBXER
+    // https://codepen.io/shahednasser/pen/XWgbGBN
+    const soundButton = document.getElementsByClassName('sound-button')[0],
+      volumeSlider = document.getElementById("volume-slider"),
+      outputContainer = document.getElementById("volume-output");
+
+    // Adds event listeners to mute button & volume slider.
+    soundButton.addEventListener('click', (e) => {
+      // Toggles mute.
+      hummingAudio.muted = !hummingAudio.muted;
+      if (hummingAudio.muted)
+        // Adds class so stage 2 audio can check whether the muted button was ticked or not.
+        soundButton.classList.add("muted")
+      else
+        soundButton.classList.remove("muted");
+      // Modifies the image/alt text depending on state.
+      const soundButtonImg = document.getElementsByClassName('sound-button-img')[0];
+      soundButtonImg.src = hummingAudio.muted ? "assets/img/stage1/muted.svg" : "assets/img/stage1/unmuted.svg";
+      soundButtonImg.alt = hummingAudio.muted ? "Sound muted" : "Sound unmuted";
+    });
   
-  // Adds event listeners to mute button & volume slider.
-  soundButton.addEventListener('click', (e) => {
-    audio.muted = !audio.muted;
-    if (audio.muted)
-      soundButton.classList.add("muted")
-    else
-      soundButton.classList.remove("muted");
-    const soundButtonImg = document.getElementsByClassName('sound-button-img')[0];
-    soundButtonImg.src = audio.muted ? "assets/img/stage1/muted.svg" : "assets/img/stage1/unmuted.svg";
-    soundButtonImg.alt = audio.muted ? "Sound muted" : "Sound unmuted";
-  });
-  
-  volumeSlider.addEventListener('input', (e) => {
-      const value = e.target.value;
-  
-      outputContainer.textContent = value;
-      audio.volume = value / 100;
+    // Adds event listener to volume slider.
+    volumeSlider.addEventListener('input', (e) => {
+        const value = e.target.value;
+    
+        // Modifies output text & volume of audio.
+        outputContainer.textContent = value;
+        hummingAudio.volume = value / 100;
+    });
+
+    // THEN hide the modal window.
+    const modalWindow = document.getElementsByClassName("begin-modal-window")[0];
+    modalWindow.style.visibility = "hidden";
+    modalWindow.style.opacity = 0;
+    modalWindow.style["pointer-events"] = "none";
   });
 });
 
-// It kindof works.
-// Thanks: https://markmichon.com/automatic-retries-with-fetch
-const fetchPlus = (url, options = {}, retries) =>
-  fetch(url, options)
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      if (retries > 0) {
-        return fetchPlus(url, options, retries - 1)
-      }
-      throw new Error(res.status)
-    })
-    .catch(error => console.error(error.message))
+// The page has fully loaded. Now what?
+// We add an event listener to the "Find your new home button".
 
 document.getElementsByClassName("find-home-button")[0].addEventListener("click", async () => {
-  // We'll first change the text of the find home button
+  // We'll first change the text of the find home button, to tell the user we're doing something
   const findHomeBtn = document.getElementsByClassName("find-home-button")[0];
   findHomeBtn.textContent = "Finding your brotherhood.."
 
-  // ..Then we'll change the globe gif to a faster one, both to tell the user something is happening
+  // ..Then we'll change the globe gif to a faster one, to tell the user something more is happening
   const globeImg = document.getElementsByClassName("globe")[0];
   globeImg.src = "assets/img/stage1/Rotating_earth_animated_transparent_fast.webp"
 
   // We'll disable it so they cannot trigger this 5000 times and break anything
   findHomeBtn.disabled = true;
 
-  // Call the API to find the closest server
+  // Call the find-bros API to fetch the: closest server, and a list of all of the other servers.
   const joinBtn = document.getElementsByClassName('join-button')[0];
-
-  // Get the servers from the API, preload everything
   const res = await fetchPlus(
     'https://find-bros.vercel.app/api/servers', {}, 5
   ).then((res) => res).catch((e) => {
@@ -77,20 +86,21 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
     joinBtn.innerText = 'An error has occurred, brother. Please try again later.';
   });
 
-  // If there's a server for the country it was requested from
+  // If there's a server for the country it was requested from:
   if (res && res.geoServer) {
 
     // Set the current country to that
     await setCurrentCountry(res.geoServer.country, res.geoServer.cc, res.geoServer.invite, false);
 
-    // Preload the server list if they want to select a different country
+    // Preload the server list into a local array, if they want to select a different country
     for (const server of res.serverList) {
       serverList[server.match.toLowerCase()] = server;
     }
 
+  // If there is no server for the country it was requested from..
   } else if (res && !res.geoServer) {
-    // If there is no server for the country it was requested from.. encourage them to make one
     document.getElementsByClassName("country-wrapper")[0].style.display = "none";
+    // encourage them to make one
     document.getElementsByClassName("no-country-found-wrapper")[0].style.display = "inline-flex";
   } else {
     // If some stupid networking error happens, just auto-reload the page after 5 seconds.
@@ -112,6 +122,10 @@ document.getElementsByClassName("find-home-button")[0].addEventListener("click",
   // Remove the current background audio element
   const hummingAudio = document.getElementById("hummingAudio");
   hummingAudio.remove();
+
+  // Change the stage 2 globe image to the webp
+  const stage2Globe = document.getElementById("stage-2-globe");
+  stage2Globe.setAttribute("src", stage2Globe.getAttribute("data-src"));
 
   // Once that's done, fade in the new stage 2 wrapper.
   const stage2Wrapper = document.getElementById("stage-2");
@@ -163,9 +177,8 @@ async function setCurrentCountry(name, countryCode, inviteURL, newCountrySelecte
   const flagImg = document.querySelector('.flag-img');
   flagImg.src = `https://flagcdn.com/${countryCode}.svg`;
 
-  // Set it up
+  // Sets the button using onclick to open the invite link in the current tab.
   joinBtn.setAttribute('onclick', `openURL("${inviteURL}")`);
-  joinBtn.innerText = `Join your brothers!`;
 
   // This is for if the user clicks one of the countries on "Not your true country?"
   // It just auto-hides the dialog and displays that button again
@@ -250,6 +263,21 @@ function populateServerList(input) {
   }
 }
 
+// It kindof works.
+// Thanks: https://markmichon.com/automatic-retries-with-fetch
+const fetchPlus = (url, options = {}, retries) =>
+  fetch(url, options)
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      if (retries > 0) {
+        return fetchPlus(url, options, retries - 1)
+      }
+      throw new Error(res.status)
+    })
+    .catch(error => console.error(error.message))
+
 // Bog standard sleep function.
 // My go-to, thanks! https://stackoverflow.com/a/39914235
 function sleep(ms) {
@@ -260,3 +288,15 @@ function sleep(ms) {
 function openURL(url) {
   window.open(url, '_self');
 }
+
+// Thank you to https://stackoverflow.com/a/59613051
+const loadCDN = src =>
+  new Promise((resolve, reject) => {
+    if (document.querySelector(`head > script[src="${src}"]`) !== null) return resolve()
+    const script = document.createElement("script")
+    script.src = src
+    script.async = true
+    document.head.appendChild(script)
+    script.onload = resolve
+    script.onerror = reject
+  });

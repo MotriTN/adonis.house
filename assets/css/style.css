@@ -24,6 +24,7 @@ canvas {
   top: 0;
   left: 0;
   z-index: -9999;
+  background-color: black;
 }
 
 .houseIcon {
@@ -437,7 +438,27 @@ canvas {
   margin-left: 1vh;
 }
 
-/* modal css */
+/* modal css - https://codepen.io/timothylong/pen/AJxrPR */
+
+.begin-modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.3s;
+}
+
+.begin-btn {
+  background-color: rgb(104, 104, 104);
+  padding: 20px;
+  font-size: 24px;
+}
 
 .modal-window {
   position: fixed;
