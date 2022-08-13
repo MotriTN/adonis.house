@@ -63,10 +63,8 @@ canvas {
 }
 
 .navbar-brand {
-  font-size: 36px;
   display: block;
   color: #fff;
-  font-family: 'Rubik Mono One', sans-serif;
 }
 
 .center-screen {
@@ -321,6 +319,7 @@ canvas {
   font-size: 16px;
   flex: 1;
   text-align: center;
+  width: 100%;
 }
 
 .country-search:focus-within {
