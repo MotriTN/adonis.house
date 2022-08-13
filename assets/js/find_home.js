@@ -8,12 +8,12 @@ window.addEventListener('load', async () => {
   // Add event listener to the "Begin" button.
   document.getElementById("begin-btn").addEventListener("click", async () => {
 
-    // Load in stars.js
-    await loadCDN('assets/js/stars.js');
-
     // Replace static Earth image in stage 1 with spinning Earth.
     const stage1Globe = document.getElementById("stage-1-globe");
     stage1Globe.setAttribute("src", stage1Globe.getAttribute("data-src"));
+
+    // Load in stars.js
+    await loadCDN('assets/js/stars.js');
 
     // Add background music
     document.getElementById("audio-player-container").innerHTML += `
@@ -66,13 +66,13 @@ window.addEventListener('load', async () => {
 // We add an event listener to the "Find your new home button".
 
 document.getElementsByClassName("find-home-button")[0].addEventListener("click", async () => {
+  // ..Then we'll change the globe gif to a faster one, to tell the user something more is happening
+  const globeImg = document.getElementsByClassName("globe")[0];
+  globeImg.src = "assets/img/stage1/Rotating_earth_animated_transparent_fast.webp";
+
   // We'll first change the text of the find home button, to tell the user we're doing something
   const findHomeBtn = document.getElementsByClassName("find-home-button")[0];
   findHomeBtn.textContent = "Finding your brotherhood.."
-
-  // ..Then we'll change the globe gif to a faster one, to tell the user something more is happening
-  const globeImg = document.getElementsByClassName("globe")[0];
-  globeImg.src = "assets/img/stage1/Rotating_earth_animated_transparent_fast.webp"
 
   // We'll disable it so they cannot trigger this 5000 times and break anything
   findHomeBtn.disabled = true;
