@@ -33,12 +33,6 @@ jobs:
         
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
-
-      # Auto-commit to repository
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "deploy: ${{ github.sha }}"
-          branch: gh-pages
           
       - name: Setup Pages
         uses: actions/configure-pages@v1

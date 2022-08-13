@@ -3,8 +3,40 @@
 var serverList = {};
 
 window.addEventListener('load', async () => {
+  document.getElementById("audio-player-container").innerHTML += `
+  <audio src="assets/mp3/humming.mp3" id="hummingAudio" autoplay loop>
+      <p>If you are reading this, it is because your browser does not support the audio element.</p>
+  </audio>`
   const hummingAudio = document.getElementById("hummingAudio");
   hummingAudio.volume = 0.5;
+
+    // These CodePens are lifesavers:
+  // https://codepen.io/idorenyinudoh/pen/GRjBXER
+  // https://codepen.io/shahednasser/pen/XWgbGBN
+  const playerButton = document.querySelector('.player-button'),
+    audio = document.querySelector('audio'),
+    soundButton = document.querySelector('.sound-button'),
+    volumeSlider = document.querySelector("#volume-slider"),
+    outputContainer = document.querySelector("#volume-output");
+  
+  // Adds event listeners to mute button & volume slider.
+  soundButton.addEventListener('click', (e) => {
+    audio.muted = !audio.muted;
+    if (audio.muted)
+      soundButton.classList.add("muted")
+    else
+      soundButton.classList.remove("muted");
+    const soundButtonImg = document.getElementsByClassName('sound-button-img')[0];
+    soundButtonImg.src = audio.muted ? "assets/img/stage1/muted.svg" : "assets/img/stage1/unmuted.svg";
+    soundButtonImg.alt = audio.muted ? "Sound muted" : "Sound unmuted";
+  });
+  
+  volumeSlider.addEventListener('input', (e) => {
+      const value = e.target.value;
+  
+      outputContainer.textContent = value;
+      audio.volume = value / 100;
+  });
 });
 
 // It kindof works.
@@ -217,34 +249,6 @@ function populateServerList(input) {
     console.log(e);
   }
 }
-
-// These CodePens are lifesavers:
-// https://codepen.io/idorenyinudoh/pen/GRjBXER
-// https://codepen.io/shahednasser/pen/XWgbGBN
-const playerButton = document.querySelector('.player-button'),
-  audio = document.querySelector('audio'),
-  soundButton = document.querySelector('.sound-button'),
-  volumeSlider = document.querySelector("#volume-slider"),
-  outputContainer = document.querySelector("#volume-output");
-
-// Adds event listeners to mute button & volume slider.
-soundButton.addEventListener('click', (e) => {
-  audio.muted = !audio.muted;
-  if (audio.muted)
-    soundButton.classList.add("muted")
-  else
-    soundButton.classList.remove("muted");
-  const soundButtonImg = document.getElementsByClassName('sound-button-img')[0];
-  soundButtonImg.src = audio.muted ? "assets/img/stage1/muted.svg" : "assets/img/stage1/unmuted.svg";
-  soundButtonImg.alt = audio.muted ? "Sound muted" : "Sound unmuted";
-});
-
-volumeSlider.addEventListener('input', (e) => {
-    const value = e.target.value;
-
-    outputContainer.textContent = value;
-    audio.volume = value / 100;
-});
 
 // Bog standard sleep function.
 // My go-to, thanks! https://stackoverflow.com/a/39914235
