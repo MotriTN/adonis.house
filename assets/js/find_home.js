@@ -91,7 +91,10 @@ document
       servers = await (await fetch('servers.json')).json();
     } catch (e) {
       console.error(e);
-      alert('Could not load servers. Please reload the page');
+      joinBtn.innerText = 'An error has occurred, brother. Reloading the page..';
+      await sleep(2000);
+      // Auto-refreshes page
+      location.reload();
     }
 
     try {
@@ -303,7 +306,7 @@ function populateServerList(input) {
         `);
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
