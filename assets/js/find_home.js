@@ -1,6 +1,7 @@
 // Whew, this JS is a bit complex. Lemme walk you through it
 
 let servers = [];
+let starSpeed = 0.1;
 
 // So, when the page fully loads..
 window.addEventListener('load', async () => {
@@ -73,6 +74,9 @@ document
     const globeImg = document.getElementsByClassName('globe')[0];
     globeImg.src =
       'assets/img/stage1/Rotating_earth_animated_transparent_fast.webp';
+    
+    // Increase speed of stars to signify we are travelling to the next stage at a fast pace
+    starSpeed = 0.6;
 
     // We'll first change the text of the find home button, to tell the user we're doing something
     const findHomeBtn = document.getElementsByClassName('find-home-button')[0];
@@ -141,6 +145,9 @@ document
 
     await sleep(2000);
 
+    // Decrease star speed to indicate we have arrived
+    starSpeed = 0.01;
+
     // Set the stage 1 wrapper to fade out
     const stage1Wrapper = document.getElementById('stage-1');
     stage1Wrapper.classList.toggle('fade-out');
@@ -159,6 +166,9 @@ document
     const stage2Wrapper = document.getElementById('stage-2');
     stage2Wrapper.style.display = 'block';
     stage2Wrapper.classList.toggle('fade-in');
+
+    // Increase star speed again to signify the presence of Adoniss
+    starSpeed = 0.2;
 
     // Add the gigachad music, using settings from volume control
     document.getElementById(
