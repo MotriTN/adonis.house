@@ -92,22 +92,25 @@ document
       country = 'us';
 
     try {
-      servers = await (await fetch('servers.json')).json();
+      servers = await fetchPlus('servers.json', {}, 5)
     } catch (e) {
       console.error(e);
-      joinBtn.innerText = 'An error has occurred, brother. Reloading the page..';
+      joinBtn.innerText = 'An error has occurred fetching the server list. Reloading the page..';
       await sleep(2000);
       // Auto-refreshes page
       location.reload();
     }
 
     try {
-      let res = await (await fetch('https://ipapi.co/json/')).json();
+      let res = await fetchPlus('https://ipapi.co/json/', {}, 5)
       region_code = res.region_code.toLowerCase();
       country = res.country.toLowerCase();
     } catch (e) {
       console.error(e);
-      alert("There's been an error getting your location. Defaulting to USA");
+      joinBtn.innerText = 'An error has occurred fetching your location. Reloading the page..';
+      await sleep(2000);
+      // Auto-refreshes page
+      location.reload();
     }
 
     const geoServer =
