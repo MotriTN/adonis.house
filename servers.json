@@ -192,6 +192,12 @@
         "cc": "it"
     },
     {
+        "match": "Jersey Channel Islands",
+        "country": "Jersey",
+        "invite": "https://discord.gg/VgcWHNUHUz",
+        "cc": "je"
+    },
+    {
         "match": "Jamaica",
         "country": "Jamaica",
         "invite": "https://discord.com/invite/WemG9JSfS2",
