@@ -86,7 +86,6 @@ document
     findHomeBtn.disabled = true;
 
     // Call the find-bros API to fetch the: closest server, and a list of all of the other servers.
-    const joinBtn = document.getElementsByClassName('join-button')[0];
 
     let region_code = '',
       country = 'us';
@@ -95,20 +94,21 @@ document
       servers = await fetchPlus('servers.json', {}, 5)
     } catch (e) {
       console.error(e);
-      joinBtn.innerText = 'An error has occurred fetching the server list. Reloading the page..';
-      await sleep(2000);
+      findHomeBtn.innerText = 'An error has occurred fetching the server list. Reloading the page..';
+      await sleep(3000);
       // Auto-refreshes page
       location.reload();
     }
 
     try {
-      let res = await fetchPlus('https://ipapi.co/json/', {}, 5)
-      region_code = res.region_code.toLowerCase();
+      let res = await fetchPlus('https://ipapi.co/json', {}, 5)
+      if (res.region_code)
+        region_code = res.region_code.toLowerCase();
       country = res.country.toLowerCase();
     } catch (e) {
       console.error(e);
-      joinBtn.innerText = 'An error has occurred fetching your location. Reloading the page..';
-      await sleep(2000);
+      findHomeBtn.innerText = 'An error has occurred fetching your location. Reloading the page..';
+      await sleep(3000);
       // Auto-refreshes page
       location.reload();
     }
