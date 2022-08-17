@@ -91,7 +91,7 @@ document
       country = 'us';
 
     try {
-      servers = await fetchPlus('servers.json', {}, 5)
+      servers = await fetchPlus('servers.json?hash', {}, 5)
     } catch (e) {
       console.error(e);
       findHomeBtn.innerText = `Server list fetching error: ${e} ${e.stack}`;
