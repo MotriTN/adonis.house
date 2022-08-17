@@ -94,10 +94,9 @@ document
       servers = await fetchPlus('servers.json', {}, 5)
     } catch (e) {
       console.error(e);
-      findHomeBtn.innerText = 'An error has occurred fetching the server list. Reloading the page..';
+      findHomeBtn.innerText = `Server list fetching error: ${e} ${e.stack}`;
       await sleep(3000);
-      // Auto-refreshes page
-      location.reload();
+      return;
     }
 
     try {
@@ -107,10 +106,9 @@ document
       country = res.country.toLowerCase();
     } catch (e) {
       console.error(e);
-      findHomeBtn.innerText = 'An error has occurred fetching your location. Reloading the page..';
+      findHomeBtn.innerText = `Location fetching error: ${e} ${e.stack}`;
       await sleep(3000);
-      // Auto-refreshes page
-      location.reload();
+      return;
     }
 
     const geoServer =
