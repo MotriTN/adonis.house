@@ -12,7 +12,7 @@ window.addEventListener('load', async () => {
     stage1Globe.setAttribute('src', stage1Globe.getAttribute('data-src'));
 
     // Load in stars.js
-    await loadCDN('assets/js/stars.js');
+    await loadCDN('assets/js/stars.js?hash');
 
     // Add background music
     document.getElementById('audio-player-container').innerHTML += `
@@ -101,9 +101,16 @@ document
 
     try {
       let res = await fetchPlus('https://ipapi.co/json', {}, 5)
-      if (res.region_code)
-        region_code = res.region_code.toLowerCase();
-      country = res.country.toLowerCase();
+      if (res) {
+        if (res.region_code) region_code = res.region_code.toLowerCase();
+
+        if (res.country) country = res.country.toLowerCase();
+      } else {
+        console.error("Error with getting IP info:", res);
+        findHomeBtn.innerText = `IP API fetching error: ${e} ${e.stack}`;
+        await sleep(3000);
+        return;
+      }        
     } catch (e) {
       console.error(e);
       findHomeBtn.innerText = `Location fetching error: ${e} ${e.stack}`;
