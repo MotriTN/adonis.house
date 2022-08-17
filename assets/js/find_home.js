@@ -107,7 +107,7 @@ document
         if (res.country) country = res.country.toLowerCase();
       } else {
         console.error("Error with getting IP info:", res);
-        findHomeBtn.innerText = `IP API fetching error: ${e} ${e.stack}`;
+        findHomeBtn.innerText = `IP API fetching error: ${res}`;
         await sleep(3000);
         return;
       }        
