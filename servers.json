@@ -30,7 +30,7 @@
     "cc": "au"
   },
   {
-    "match": "Austria",
+    "match": "Austria Österreich Osterreich",
     "country": "Austria",
     "invite": "https://discord.gg/hdr4hWqUEZ",
     "cc": "at"
@@ -240,7 +240,7 @@
     "cc": "mk"
   },
   {
-    "match": "Mauritius",
+    "match": "Mauritius île Maurice",
     "country": "Mauritius",
     "invite": "https://discord.gg/PQdUhqgpE8",
     "cc": "mu"
@@ -258,7 +258,7 @@
     "cc": "md"
   },
   {
-    "match": "Morocco",
+    "match": "Morocco المغرب",
     "country": "Morocco",
     "invite": "https://discord.gg/2kbKHPVsFp",
     "cc": "ma"
@@ -276,7 +276,7 @@
     "cc": "nl"
   },
   {
-    "match": "New Zealand",
+    "match": "New Zealand Aotearoa",
     "country": "New Zealand",
     "invite": "https://discord.gg/qYSGysExep",
     "cc": "nz"
@@ -286,6 +286,12 @@
     "country": "Norway",
     "invite": "https://discord.gg/tWBZAQw3tp",
     "cc": "no"
+  },
+  {
+    "match": "Oman سلطنة عمان",
+    "country": "Oman",
+    "invite": "https://discord.gg/7DF77x86JF",
+    "cc": "om"
   },
   {
     "match": "Pakistan پاکستان",
@@ -360,7 +366,7 @@
     "cc": "es"
   },
   {
-    "match": "Sri Lanka",
+    "match": "Sri Lanka ශ්රී ලංකාව",
     "country": "Sri Lanka",
     "invite": "https://discord.gg/tsN69d3saK",
     "cc": "lk"
