@@ -26,21 +26,16 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      hash: uuid
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Generates random UUID for cache-busting
-        run: echo hash=$(uuidgen) >> $GITHUB_ENV
-
-      - name: Replaces cache-busting template string with UUID
+      - name: Replaces cache-busting template string with SHA
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "?hash"
-          replace: "?${{ env.GITHUB_SHA }}"
+          find: "hash"
+          replace: ${{ github.sha }}
           regex: false
         
       - name: Minify Action
