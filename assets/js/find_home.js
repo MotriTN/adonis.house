@@ -170,6 +170,10 @@ document
     const stage2Globe = document.getElementById('stage-2-globe');
     stage2Globe.setAttribute('src', stage2Globe.getAttribute('data-src'));
 
+    // Change the stage 2 globe image to the webp
+    const adonisRising = document.getElementsByClassName('adonis_rising')[0];
+    adonisRising.setAttribute('src', adonisRising.getAttribute('data-src'));
+
     // Once that's done, fade in the new stage 2 wrapper.
     const stage2Wrapper = document.getElementById('stage-2');
     stage2Wrapper.style.display = 'block';
