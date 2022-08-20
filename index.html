@@ -85,7 +85,7 @@
         </style>
         <div class="center-screen">
             <nav class="navbar">
-                <a class="navbar-brand" href="/"><img src="assets/img/adonis.webp" class="adonisImg" height="28px" alt="Adonis."><img src="assets/img/house.svg" class="houseIcon" alt="House" height="36px" width="36px"/></a>
+                <a class="navbar-brand" href="/"><img src="assets/img/adonis.webp" class="adonisImg" height="28px" width="220px" alt="Adonis."><img src="assets/img/house.svg" class="houseIcon" alt="House" height="36px" width="36px"/></a>
             </nav>
             <div class="wrapper" id="stage-1">
                 <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp" alt="Adonis holding the spinning Earth"/>
@@ -139,9 +139,23 @@
 
         <div class="wrapper" id="stage-1">
             <nav class="navbar">
-                <a class="navbar-brand" href="#"><img src="assets/img/adonis.webp" class="adonisImg" alt="Adonis." height="28px"><img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
+                <a class="navbar-brand" href="#"><img src="assets/img/adonis.webp" class="adonisImg" alt="Adonis." height="28px" width="220px"><img src="assets/img/house.svg" class="houseIcon" alt="House"/></a>
             </nav>
-            <img class="adonisglobe" src="assets/img/stage1/adonisglobe.webp" alt="Adonis holding the spinning Earth" height="auto" width="auto"/>
+            <img class="adonisglobe" 
+                srcset="
+                assets/img/stage1/adonisglobe-277.webp  277w,
+                assets/img/stage1/adonisglobe-554.webp  554w,
+                assets/img/stage1/adonisglobe-900.webp  900w,
+                assets/img/stage1/adonisglobe-1170.webp  1170w,
+                assets/img/stage1/adonisglobe-1390.webp  1390w,
+                assets/img/stage1/adonisglobe-1580.webp  1580w,
+                assets/img/stage1/adonisglobe-1750.webp  1750w,
+                assets/img/stage1/adonisglobe-1910.webp  1910w,
+                assets/img/stage1/adonisglobe-2048.webp  2048w"
+                alt="Adonis holding the spinning Earth"
+                src="assets/img/stage1/adonisglobe-900.webp"
+                sizes="(max-device-width: 800px) 55vh, (min-device-width: 800px) 70vh, 55vh"
+            />
             <img class="globe" id="stage-1-globe" src="assets/img/stage1/Earth_static.webp" data-src="assets/img/stage1/Rotating_earth_animated_transparent.webp" alt="The Earth spinning" height="auto" width="auto"/>
             <button class="button find-home-button">Find your new home</button>
             <br />
