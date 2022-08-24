@@ -60,6 +60,12 @@
     "cc": "be"
   },
   {
+    "match": "Belarus Беларусь",
+    "country": "Belarus",
+    "invite": "https://discord.gg/PnbVj455CM",
+    "cc": "by"
+  },
+  {
     "match": "Bosnia and Herzegovina Bosna i Hercegovina",
     "country": "Bosnia and Herzegovina",
     "invite": "https://discord.gg/y6NNhDRPw4",
