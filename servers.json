@@ -156,6 +156,12 @@
     "cc": "gr"
   },
   {
+    "match": "Hong Kong 香港",
+    "country": "Hong Kong",
+    "invite": "https://chat.whatsapp.com/ERVMPmHFK3cKScseHsx5ys",
+    "cc": "hk"
+  },
+  {
     "match": "Hungary Magyarország",
     "country": "Hungary",
     "invite": "https://discord.gg/SbGqFbdA7s",
