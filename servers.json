@@ -234,6 +234,12 @@
     "cc": "lv"
   },
   {
+    "match": "Lebanon لبنان Liban",
+    "country": "Lebanon",
+    "invite": "https://discord.gg/gjKzprh9RD",
+    "cc": "lb"
+  },
+  {
     "match": "Lithuania Lietuva",
     "country": "Lithuania",
     "invite": "https://discord.gg/gFbBDfdRcX",
