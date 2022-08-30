@@ -480,6 +480,12 @@
     "cc": "us-wa"
   },
   {
+    "match": "Thailand ประเทศไทย",
+    "country": "Thailand",
+    "invite": "https://discord.gg/2ahAJD9r8q",
+    "cc": "th"
+  },
+  {
     "match": "Venezuela",
     "country": "Venezuela",
     "invite": "https://discord.gg/xvdBZ3kBgk",
