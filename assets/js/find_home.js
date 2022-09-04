@@ -9,7 +9,7 @@ window.addEventListener('load', async () => {
   document.getElementById('begin-btn').addEventListener('click', async () => {
     // Replace static Earth image in stage 1 with spinning Earth.
     const stage1Globe = document.getElementById('stage-1-globe');
-    stage1Globe.setAttribute('src', stage1Globe.getAttribute('data-src'));
+    await loadImage(stage1Globe, stage1Globe.getAttribute('data-src'))
 
     // Load in stars.js
     await loadCDN('assets/js/stars.js?hash');
@@ -72,8 +72,7 @@ document
   .addEventListener('click', async () => {
     // ..Then we'll change the globe gif to a faster one, to tell the user something more is happening
     const globeImg = document.getElementsByClassName('globe')[0];
-    globeImg.src =
-      'assets/img/stage1/Rotating_earth_animated_transparent_fast.webp';
+    await loadImage(globeImg, 'assets/img/stage1/Rotating_earth_animated_transparent_fast.webp');
     
     // Increase speed of stars to signify we are travelling to the next stage at a fast pace
     starSpeed = 0.6;
@@ -168,11 +167,11 @@ document
 
     // Change the stage 2 globe image to the webp
     const stage2Globe = document.getElementById('stage-2-globe');
-    stage2Globe.setAttribute('src', stage2Globe.getAttribute('data-src'));
+    await loadImage(stage2Globe, stage2Globe.getAttribute('data-src'));
 
-    // Change the stage 2 globe image to the webp
+    // Change the stage 2 adonis image to the webp
     const adonisRising = document.getElementsByClassName('adonis_rising')[0];
-    adonisRising.setAttribute('src', adonisRising.getAttribute('data-src'));
+    await loadImage(adonisRising, adonisRising.getAttribute('data-src'));
 
     // Once that's done, fade in the new stage 2 wrapper.
     const stage2Wrapper = document.getElementById('stage-2');
@@ -370,3 +369,15 @@ const loadCDN = (src) =>
     script.onload = resolve;
     script.onerror = reject;
   });
+
+// https://stackoverflow.com/questions/37854355/wait-for-image-loading-to-complete-in-javascript
+// amen ^_^
+async function loadImage(img, imageUrl) {
+    const imageLoadPromise = new Promise(resolve => {
+        img.onload = resolve;
+        img.src = imageUrl;
+    });
+
+    await imageLoadPromise;
+    return img;
+}
