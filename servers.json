@@ -480,6 +480,12 @@
     "cc": "us-nj"
   },
   {
+    "match": "USA United States America Texas",
+    "country": "United States/Texas",
+    "invite": "https://discord.gg/Uws6XVZk5m",
+    "cc": "us-tx"
+  },
+  {
     "match": "USA United States America Washington",
     "country": "United States/Washington",
     "invite": "https://discord.gg/VBHE3RNkYh",
