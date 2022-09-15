@@ -468,6 +468,12 @@
     "cc": "us-az"
   },
   {
+    "match": "USA United States America Colorado",
+    "country": "United States/Colorado",
+    "invite": "https://discord.gg/FTPshqUkAE",
+    "cc": "us-co"
+  },
+  {
     "match": "USA United States America Connecticut",
     "country": "United States/Connecticut",
     "invite": "https://discord.gg/Mpy8NJgGm2",
